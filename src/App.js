@@ -67,7 +67,7 @@ export function App () {
         <Title>Contacts</Title>
         {contacts.length !== 0 && <Filter value={filter} onChange={changeFilter} />}
         <ContactList
-          contacts={getVisibleContacts()}
+          // contacts={getVisibleContacts()}
           deleteContact={deleteContact}
         />
         <Toaster

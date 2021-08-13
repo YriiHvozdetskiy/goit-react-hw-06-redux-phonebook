@@ -1,9 +1,12 @@
+import { useSelector } from 'react-redux';
 import s from '././ContactList.module.scss';
 
-function ContactList({ contacts, deleteContact }) {
+function ContactList({ deleteContact }) {
+  const {items} = useSelector((state) => ( state.contacts.contacts ))
+
   return (
     <ul className={s.list}>
-      {contacts && contacts.map(({ id, name, number }) => {
+      {items && items.map(({ id, name, number }) => {
         return (
           <li className={s.item} key={id}>
             <span>{name}</span>: <span>{number}</span>

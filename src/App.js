@@ -6,7 +6,7 @@ import { ContactForm } from './components/ContactForm/ContactForm';
 import Title from './components/Title/Title';
 import ContactList from 'components/ContactList/ContactList';
 import { useDispatch } from 'react-redux';
-import { addContact, addContacts } from './redux/actions/actions';
+import { addContact } from './redux/actions/actions';
 
 export function App () {
   const [contacts,setContacts] = useState(()=>{
@@ -22,7 +22,9 @@ export function App () {
 
 
   const getContact = (name, number) => {
+    // створюєм обєкт з даних які прийшли з форми + дод id
     const contact = { id: nanoid(), name, number };
+    // відправляєм actions методом dispatch в reducer
     dispatch(addContact(contact))
 
     // setContacts(prev=>{

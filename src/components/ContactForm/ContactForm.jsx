@@ -1,14 +1,11 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import { DebounceInput } from 'react-debounce-input';
-import { useDispatch } from 'react-redux';
-import { addContacts } from '../../redux/actions/actions';
 import s from './ContactForm.module.scss';
 
 export const  ContactForm =({coincidence= true ,onSubmit})=>{
   const [name, setName]= useState('')
   const [number,setNumber]= useState('')
-  const dispatch = useDispatch()
 
 
   const nameInputId = nanoid();
@@ -35,8 +32,6 @@ export const  ContactForm =({coincidence= true ,onSubmit})=>{
     e.preventDefault();
     if (coincidence(name.toLowerCase())) return;
 
-    dispatch(addContacts())
-    
     onSubmit(name, number);
 
     setName('')

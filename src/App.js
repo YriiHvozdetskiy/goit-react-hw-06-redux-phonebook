@@ -1,11 +1,12 @@
 import { nanoid } from 'nanoid';
 import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-
 import Filter from 'components/Filter/Filter';
 import { ContactForm } from './components/ContactForm/ContactForm';
 import Title from './components/Title/Title';
 import ContactList from 'components/ContactList/ContactList';
+import { useDispatch } from 'react-redux';
+import { addContact, addContacts } from './redux/actions/actions';
 
 export function App () {
   const [contacts,setContacts] = useState(()=>{
@@ -13,18 +14,20 @@ export function App () {
   })
 
   const [filter,setFilter]= useState('')
+  const dispatch = useDispatch()
 
   useEffect(()=>{
     window.localStorage.setItem('contacts',JSON.stringify(contacts))
   },[contacts])
 
 
-  const addContact = (name, number) => {
+  const getContact = (name, number) => {
     const contact = { id: nanoid(), name, number };
+    dispatch(addContact(contact))
 
-    setContacts(prev=>{
-      return [contact, ...prev]
-    })
+    // setContacts(prev=>{
+    //   return [contact, ...prev]
+    // })
 
     toast.success(`${name} added a contact`);
   };
@@ -58,7 +61,7 @@ export function App () {
       <>
         <Title>Phonebook</Title>
         <ContactForm
-          onSubmit={addContact}
+          onSubmit={getContact}
           coincidence={handleCoincidence}
         />
         <Title>Contacts</Title>

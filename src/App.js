@@ -5,7 +5,7 @@ import Filter from 'components/Filter/Filter';
 import { ContactForm } from './components/ContactForm/ContactForm';
 import Title from './components/Title/Title';
 import ContactList from 'components/ContactList/ContactList';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addContact } from './redux/actions/actions';
 
 export function App () {
@@ -15,7 +15,7 @@ export function App () {
 
   const [filter,setFilter]= useState('')
   const dispatch = useDispatch()
-
+  const { items } = useSelector((state) => (state.contacts.contacts));
   useEffect(()=>{
     window.localStorage.setItem('contacts',JSON.stringify(contacts))
   },[contacts])
@@ -67,7 +67,8 @@ export function App () {
           coincidence={handleCoincidence}
         />
         <Title>Contacts</Title>
-        {contacts.length !== 0 && <Filter value={filter} onChange={changeFilter} />}
+        {/*рендерем Filter тільки тоді коли щось є в state із reducer*/}
+        {items.length !== 0 && <Filter value={filter} onChange={changeFilter} />}
         <ContactList
           // contacts={getVisibleContacts()}
           deleteContact={deleteContact}

@@ -1,7 +1,9 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import toast from 'react-hot-toast';
+import { deleteContact } from '../../redux/actions/actions';
 import s from '././ContactList.module.scss';
 
-function ContactList({ deleteContact }) {
+function ContactList() {
   //в useSelector приходе глобальний  state з store(обєкт що повертає функ combineReducers) в якому вибераєм відповідне поле (contacts:contactsReducer),
   // де знаходиться обєкт з reducera:
   // initialState = {
@@ -20,6 +22,16 @@ function ContactList({ deleteContact }) {
     return items.filter(({ name }) => name.toLowerCase().includes(normalizedFilter)); // повертаєм відфільтрований масив з результатами пошуку
   });
 
+  const dispatch = useDispatch();
+
+  const removeContact = id => { // отримуємо id контакта який потрібно видалити при кліку на кнопку
+    // створюєм новий масив БЕЗ контакта як потрібно видалити
+    const value = items.filter(contact => contact.id !== id);
+    // відправляєм новий масив в reducer в state
+    dispatch(deleteContact(value));
+    toast.success(`deleted contact`);
+  };
+
   return (
     // рендерем контакти з масиву items || рендерем результати пошуку
     <ul className={s.list}>
@@ -30,8 +42,7 @@ function ContactList({ deleteContact }) {
             <button
               className={s.button}
               type='button'
-              id={id}
-              onClick={deleteContact}
+              onClick={() => removeContact(id)}
             >
               Delete
             </button>

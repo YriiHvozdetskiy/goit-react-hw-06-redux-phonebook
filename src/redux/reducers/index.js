@@ -1,4 +1,4 @@
-import { ADD_CONTACT, FILTER_CONTACTS } from '../actions/contacts-types';
+import { ADD_CONTACT, DELETE_CONTACT, FILTER_CONTACTS } from '../actions/contacts-types';
 
 const initialState = {
   contacts: {
@@ -21,6 +21,13 @@ export const contactsReducer = (state = initialState, actions) => { // actions {
         contacts: {
           ...state.contacts, // розпиляєм попередні дані з обєкта contacts щоб не мутувати state
           filter: actions.payload, // літери за якими шукаєм контакти в ContactsList
+        },
+      };
+    case DELETE_CONTACT: // перевіряєм type який в actions.type -- type: DELETE_CONTACT,'DELETE_CONTACT'
+      return {
+        contacts: {
+          ...state.contacts, // розпиляєм попередні дані з обєкта contacts щоб не мутувати state
+          items: [...actions.payload],// розпиляєм новий відфільтрований масив БЕЗ контакта який видалили
         },
       };
     default:

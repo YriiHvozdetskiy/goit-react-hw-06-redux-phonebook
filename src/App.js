@@ -16,12 +16,6 @@ export function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const deleteContact = e => {
-    const id = e.currentTarget.id;
-    setContacts(contacts.filter(n => n.id !== id));
-    toast.success(`deleted contact`);
-  };
-
   const handleCoincidence = currentName => {
     if (!contacts) return;
 
@@ -39,9 +33,7 @@ export function App() {
       <Title>Contacts</Title>
       {/*рендерем Filter тільки тоді коли щось є в state із reducer*/}
       {items.length !== 0 && <Filter />}
-      <ContactList
-        deleteContact={deleteContact}
-      />
+      <ContactList />
       <Toaster
         toastOptions={{
           success: {

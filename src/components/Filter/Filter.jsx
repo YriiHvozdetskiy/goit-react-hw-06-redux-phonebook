@@ -1,9 +1,15 @@
-import { nanoid } from 'nanoid';
-
+import { useDispatch } from 'react-redux';
+import { filterContacts } from '../../redux/actions/actions';
 import s from './Filter.module.scss';
 
-function Filter({ value, onChange }) {
-  // const inputListId = nanoid(); htmlFor={inputListId}
+function Filter() {
+  const dispatch = useDispatch();
+
+  const changeFilter = e => {
+    const searchValue = e.target.value; // value яке вели для пошуку контакта з input
+    dispatch(filterContacts(searchValue)); // відправляєм в reducer
+  };
+
   return (
     <>
       <label className={s.label}>
@@ -11,9 +17,7 @@ function Filter({ value, onChange }) {
       </label>
       <input
         className={s.input}
-        // id={inputListId}
-        value={value}
-        onChange={onChange}
+        onChange={changeFilter}
       />
     </>
   );

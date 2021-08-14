@@ -10,11 +10,18 @@ function ContactList({ deleteContact }) {
   //     filter: '',
   //   },
   // };
-  // деструктизіруєм з обєкта contacts масив items, де знаходяться контакти з форми  { id, name, number }
-  const { items } = useSelector((state) => (state.contacts.contacts));
+
+  // items це вже відфільтрований масив з reducera
+  // items рендере список контактів які ми додали і коли в Filter робем пошук показує результати (відфільтрований масив з результатами пошуку)
+  const items = useSelector((state) => {
+    const { items, filter } = state.contacts.contacts; // деструк з raducera поля обєкта
+
+    const normalizedFilter = filter.toLowerCase();
+    return items.filter(({ name }) => name.toLowerCase().includes(normalizedFilter)); // повертаєм відфільтрований масив з результатами пошуку
+  });
 
   return (
-    // рендерем контакти з масиву items
+    // рендерем контакти з масиву items || рендерем результати пошуку
     <ul className={s.list}>
       {items && items.map(({ id, name, number }) => {
         return (

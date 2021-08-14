@@ -11,13 +11,15 @@ const contactsSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
-      addContact: (state, actions) => { // тут потрібно отримати нове состоянія чи його змінити тому потрібні '{}'
+      addContact(state, actions) { // тут потрібно отримати нове состоянія чи його змінити тому потрібні '{}'
         state.contacts.items.push(actions.payload);
       },
-      filterContacts: ({ contacts }, actions) => {
+      filterContacts({ contacts }, actions) {
         contacts.filter = actions.payload;
       },
-      deleteContact: ({ contacts }, actions) => [...contacts.items, ...actions.payload],
+      deleteContact(state, actions) {
+        state.contacts.items = actions.payload; // записуєм поверх масив бек удальоного контакта удалили ми його в ф removeContact в ContactList
+      },
     },
   })
 ;

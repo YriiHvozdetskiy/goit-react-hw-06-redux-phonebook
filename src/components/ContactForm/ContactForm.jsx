@@ -1,15 +1,16 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
-import { DebounceInput } from 'react-debounce-input';
-import { addContact } from '../../redux/actions/actions';
 import toast from 'react-hot-toast';
+import { DebounceInput } from 'react-debounce-input';
+import { nanoid } from 'nanoid';
+import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from '../../redux/actions/actions';
 import s from './ContactForm.module.scss';
 
-export const ContactForm = ({ coincidence = true }) => {
+export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
+  const { items } = useSelector((state) => state.contacts.contacts);
 
   const handleChange = e => {
     const { name, value } = e.target;
@@ -28,9 +29,19 @@ export const ContactForm = ({ coincidence = true }) => {
     }
   };
 
+  const handleCoincidence = currentName => {
+    if (!items) return;
+    // якщо імя вже є в контактах повідомляєм і не даєм дод імя поки користувач не зміне його
+    if (items.find(({ name }) => name.toLowerCase() === currentName)) {
+      toast.error(`${name} is already in contacts`);
+      return true;
+    }
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
-    if (coincidence(name.toLowerCase())) return;
+    // перед відправкою перевіряєм чи таке імя є в списку
+    if (handleCoincidence(name.toLowerCase())) return;
 
     // створюєм обєкт з даних які прийшли з форми + дод id
     const contact = { id: nanoid(), name, number };

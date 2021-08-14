@@ -1,4 +1,4 @@
-import toast, { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Filter from 'components/Filter/Filter';
@@ -16,20 +16,10 @@ export function App() {
     window.localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const handleCoincidence = currentName => {
-    if (!contacts) return;
-
-    if (contacts.find(({ name }) => name.toLowerCase() === currentName)) {
-      toast.error(`${currentName} is already in contacts`);
-      return true;
-    }
-  };
   return (
     <>
       <Title>Phonebook</Title>
-      <ContactForm
-        coincidence={handleCoincidence}
-      />
+      <ContactForm />
       <Title>Contacts</Title>
       {/*рендерем Filter тільки тоді коли щось є в state із reducer*/}
       {items.length !== 0 && <Filter />}

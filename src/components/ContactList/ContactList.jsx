@@ -4,6 +4,7 @@ import { deleteContact } from '../../redux/actions/actions';
 import s from '././ContactList.module.scss';
 
 function ContactList() {
+  //TODO виправити баг коли фільтруєм список з декількох контактів і видаляєм контакт який від фільтрували, щоб зявлявся список з рештою контактів
   //в useSelector приходе глобальний  state з store(обєкт що повертає функ combineReducers) в якому вибераєм відповідне поле (contacts:contactsReducer),
   // де знаходиться обєкт з reducera:
   // initialState = {

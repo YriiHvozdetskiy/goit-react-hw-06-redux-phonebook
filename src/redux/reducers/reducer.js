@@ -7,7 +7,7 @@ const initialState = {
   },
 };
 
-const contactSlice = createSlice({
+const contactsSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
@@ -18,8 +18,8 @@ const contactSlice = createSlice({
   })
 ;
 
-export const { addContact, filterContacts, deleteContact } = contactSlice.actions;
-export default contactSlice.reducer;
+export const { addContact, filterContacts, deleteContact } = contactsSlice.actions;
+export default contactsSlice.reducer;
 
 // import { ADD_CONTACT, DELETE_CONTACT, FILTER_CONTACTS } from '../actions/contacts-types';
 //

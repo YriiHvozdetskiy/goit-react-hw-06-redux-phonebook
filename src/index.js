@@ -19,6 +19,8 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
+//=============== clean Redux ===============
+
 // import React from 'react';
 // import { PersistGate } from 'redux-persist/integration/react';
 // import ReactDOM from 'react-dom';

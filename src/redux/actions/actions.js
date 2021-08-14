@@ -18,3 +18,4 @@ export const deleteContact = (value) => ({
   payload: value,
 });
 
+// ============ потрібно коли використовуєм чистий Redux ============

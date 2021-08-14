@@ -11,15 +11,21 @@ const contactsSlice = createSlice({
     name: 'contacts',
     initialState,
     reducers: {
-      addContact: (state, actions) => state.contacts.items.push(actions.payload),
-      filterContacts: ({ contacts }, actions) => contacts.filter = actions.payload,
+      addContact: (state, actions) => { // тут потрібно отримати нове состоянія чи його змінити тому потрібні '{}'
+        state.contacts.items.push(actions.payload);
+      },
+      filterContacts: ({ contacts }, actions) => {
+        contacts.filter = actions.payload;
+      },
       deleteContact: ({ contacts }, actions) => [...contacts.items, ...actions.payload],
     },
   })
 ;
 
-export const { addContact, filterContacts, deleteContact } = contactsSlice.actions;
-export default contactsSlice.reducer;
+export const { addContact, filterContacts, deleteContact } = contactsSlice.actions; // експортуємо  actions -- в яких будем відправляти дані в reducer
+export const contactsReducer = contactsSlice.reducer; // тут state i динамічні actions
+
+//=============== clean Redux ===============
 
 // import { ADD_CONTACT, DELETE_CONTACT, FILTER_CONTACTS } from '../actions/contacts-types';
 //

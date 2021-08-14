@@ -3,15 +3,15 @@ import { DebounceInput } from 'react-debounce-input';
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addContact } from '../../redux/actions/actions';
+import { addContact } from '../../redux/reducers/reducer';
 import s from './ContactForm.module.scss';
 
 export const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
   const dispatch = useDispatch();
-  const  items  = useSelector((state) => state);
-  console.log(items);
+  const { items } = useSelector((state) => state.contacts.contacts);
+
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -121,6 +121,8 @@ export const ContactForm = () => {
     </>
   );
 };
+
+//=============== clean Redux ===============
 
 // import toast from 'react-hot-toast';
 // import { DebounceInput } from 'react-debounce-input';

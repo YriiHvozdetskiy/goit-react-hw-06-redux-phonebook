@@ -25,6 +25,8 @@ function Filter() {
 
 export default Filter;
 
+//=============== clean Redux ===============
+
 // import { useDispatch } from 'react-redux';
 // import { filterContacts } from '../../redux/actions/actions';
 // import s from './Filter.module.scss';

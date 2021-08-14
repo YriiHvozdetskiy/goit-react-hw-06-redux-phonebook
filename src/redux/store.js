@@ -1,9 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import * as contactsSlice from './reducers/reducer';
-
+import { contactsReducer } from './reducers/reducer';
 
 const rootReducer = {
-  contacts: contactsSlice,
+  contacts: contactsReducer,
 };
 
 
@@ -13,6 +12,8 @@ const store = configureStore({
 });
 
 export default store;
+
+//=============== clean Redux ===============
 
 // import { persistStore, persistReducer } from 'redux-persist';
 // import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web

@@ -6,7 +6,7 @@ import ContactList from 'components/ContactList/ContactList';
 import { ContactForm } from './components/ContactForm/ContactForm';
 
 export function App() {
-  const { items } = useSelector((state) => (state.contacts.contacts));
+  // const { items } = useSelector((state) => (state.contacts.contacts));
 
   return (
     <>
@@ -14,7 +14,7 @@ export function App() {
       <ContactForm />
       <Title>Contacts</Title>
       {/*рендерем Filter тільки тоді коли щось є в state із reducer*/}
-      {items.length !== 0 && <Filter />}
+      {/*{items.length !== 0 && <Filter />}*/}
       <ContactList />
       <Toaster
         toastOptions={{

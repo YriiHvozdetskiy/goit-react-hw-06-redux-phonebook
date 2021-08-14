@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { contactsReducer } from './reducers/reducer';
 
+// головний reducer де буде зберігатися reduceru для всіх задач (всі reduceru приложенія)
 const rootReducer = {
   contacts: contactsReducer,
 };
@@ -8,7 +9,7 @@ const rootReducer = {
 
 const store = configureStore({
   reducer: rootReducer,
-  devTools: process.env.NODE_ENV === 'development',
+  devTools: process.env.NODE_ENV === 'development', // потрібно щоб тулзи працювали тільки в розробці
 });
 
 export default store;

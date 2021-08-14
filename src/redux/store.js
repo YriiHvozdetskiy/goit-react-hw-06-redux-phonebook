@@ -1,7 +1,7 @@
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { combineReducers, createStore } from '@reduxjs/toolkit';
-import { contactsReducer } from './reducers';
+import { contactsReducer } from './reducers/reducer';
 import { devToolsEnhancer } from 'redux-devtools-extension';
 
 const persistConfig = {

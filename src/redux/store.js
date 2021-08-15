@@ -23,7 +23,7 @@ const middleware = (getDefaultMiddleware) =>
 const contactsPersistConfig = {
   key: 'contacts',
   storage,
-  blacklist:['filter'], // виключаєм свойство filter з нашого reducera з localStorage (не буде показуватися)
+  // blacklist: ['filter'], // виключаєм свойство filter з нашого reducera з localStorage (не буде показуватися)
 };
 
 const store = configureStore({

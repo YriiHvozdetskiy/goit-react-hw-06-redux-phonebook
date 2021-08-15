@@ -12,7 +12,7 @@ const contactsSlice = createSlice({
     initialState,
     reducers: {
       addContact(state, actions) { // тут потрібно отримати нове состоянія чи його змінити тому потрібні '{}'
-        state.contacts.items.push(actions.payload);
+        state.contacts.items.unshift(actions.payload);
       },
       filterContacts(state, actions) {  // має бути саме така структура  nameActions(state, actions), БЕЗ деструктивізації
         state.contacts.filter = actions.payload;

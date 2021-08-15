@@ -14,7 +14,7 @@ const contactsSlice = createSlice({
       addContact(state, actions) { // тут потрібно отримати нове состоянія чи його змінити тому потрібні '{}'
         state.contacts.items.push(actions.payload);
       },
-      filterContacts(state, actions) {
+      filterContacts(state, actions) {  // має бути саме така структура  nameActions(state, actions), БЕЗ деструктивізації
         state.contacts.filter = actions.payload;
       },
       deleteContact(state, actions) {

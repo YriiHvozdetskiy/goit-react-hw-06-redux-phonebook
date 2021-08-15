@@ -12,8 +12,8 @@ export function App() {
     <>
       <Title>Phonebook</Title>
       <ContactForm />
-      <Title>Contacts</Title>
-      {/*рендерем Filter тільки тоді коли щось є в state із reducer*/}
+      {/*рендерем Filter,Title тільки тоді коли щось є в state із reducer*/}
+      {items.length !== 0 && <Title>Contacts</Title>}
       {items.length !== 0 && <Filter />}
       <ContactList />
       <Toaster
@@ -35,6 +35,7 @@ export function App() {
     </>
   );
 }
+
 //=============== clean Redux ===============
 
 // import { Toaster } from 'react-hot-toast';

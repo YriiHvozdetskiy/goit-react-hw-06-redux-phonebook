@@ -6,7 +6,7 @@ import ContactList from 'components/ContactList/ContactList';
 import { ContactForm } from './components/ContactForm/ContactForm';
 
 export function App() {
-  const { items } = useSelector((state) => state.contacts.contacts);
+  const { items } = useSelector((state) =>state.contacts.contacts);
 
   return (
     <>

@@ -1,18 +1,48 @@
-import { configureStore } from '@reduxjs/toolkit';
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
 import { contactsReducer } from './reducers/reducer';
 
-// головний reducer де буде зберігатися reduceru для всіх задач (всі reduceru приложенія)
-const rootReducer = {
-  contacts: contactsReducer,
+const persistConfig = {
+  key: 'contacts',
+  storage,
 };
+// це щоб ігнурувало ці actions (костильок) [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+const middleware = (getDefaultMiddleware) =>
+  getDefaultMiddleware({
+    serializableCheck: {
+      ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+    },
+  });
 
+// головний reducer де буде зберігатися reduceru для всіх задач (всі reduceru приложенія)
+// combineReducers потрібний щоб працював persistReducer
+const rootReducer = combineReducers({
+  contacts: contactsReducer,
+});
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: persistedReducer,
+  middleware,
   devTools: process.env.NODE_ENV === 'development', // потрібно щоб тулзи працювали тільки в розробці
 });
 
-export default store;
+// persistor обгортка над нашим стором
+const persistor = persistStore(store);
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { store, persistor };
 
 //=============== clean Redux ===============
 
